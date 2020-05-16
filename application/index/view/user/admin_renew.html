@@ -1,0 +1,80 @@
+﻿{extend name='public/_base'}
+
+{block name='seo'}
+<title>{$title|default='标题'}</title>
+<meta name="keywords" content="{$keywords|default='关键字'}">
+<meta name="description" content="{$desc|default='描述'}">
+{/block}
+
+{block name='content'}
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a href="{:url('index/index')}">首页</a>
+		<span class="c-gray en">&gt;</span>
+		管理员管理
+		<span class="c-gray en">&gt;</span>
+		管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			{eq name="$Think.session.user_info.role" value="超级管理员"}
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l"> <a href="{:url('user/adminList')}" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 返回列表</a> </span>
+				<span class="r">共有数据：<strong>{$count}</strong> 条</span>
+			</div>
+			{/eq}
+			<table class="table table-border table-bordered table-bg">
+				<thead>
+					<tr>
+						<th scope="col" colspan="9">管理员列表</th>
+					</tr>
+					<tr class="text-c">
+						<th width="40">ID</th>
+						<th width="150">用户名</th>
+						<th width="150">邮箱</th>
+						<th width="100">角色</th>
+						<th width="130">加入时间</th>
+						<th width="130">上次更改</th>
+						<th width="100">是否已启用</th>
+						<th width="100">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					{volist name='list' id='vo'}
+					<tr class="text-c">
+						<td>{$vo.id}</td>
+						<td>{$vo.name}</td>
+						<td>{$vo.email}</td>
+						<td>{$vo.role}</td>
+						<td>{$vo.create_time}</td>
+						<td>{$vo.update_time}</td>
+						<td class="td-status">
+						{if condition="$vo.status eq 1"}
+						<span class="label label-success radius">已启用</span>
+						{else/}
+						<span class="label radius">已禁用</span>
+						{/if}
+						</td>
+						<td><a href="" onclick="renew(this, {$vo.id})" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 恢复</a></td>
+
+					</tr>
+					{/volist}
+				</tbody>
+			</table>
+		</article>
+	</div>
+</section>
+{/block}
+<script>
+
+</script>
+{block name="js"}
+<script>
+function renew(obj, id)
+{
+	if (confirm('确定恢复吗？')) {
+		$.get("{:url('user/unDelete')}", {id:id});
+		$(this).parents('tr').remove();
+		alert('成功恢复');
+	}
+}
+</script>
+{/block}

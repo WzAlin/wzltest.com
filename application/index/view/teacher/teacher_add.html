@@ -1,0 +1,73 @@
+{extend name='public/_base'}
+
+{block name='seo'}
+<title>{$title|default='标题'}</title>
+<meta name="keywords" content="{$keywords|default='关键字'}">
+<meta name="description" content="{$desc|default='描述'}">
+{/block}
+
+{block name='content'}
+<article class="cl pd-20">
+	<form action="{:url('teacher/addteacher')}" method="post" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>教师：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="adminName" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">学历：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="degree" size="1">
+					<option value="0">大专</option>
+					<option value="1">本科</option>
+					<option value="2">研究生</option>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系方式：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" autocomplete="off"  placeholder="联系方式" id="adminName" name="mobile">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>毕业学校：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="" name="school" id="adminName">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">是否启用：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="status" size="1">
+					<option value="0">不启用</option>
+					<option value="1">启用</option>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">负责班级：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="grade_id" size="1">
+				{volist name="gradeList" id="vo"}
+					<option value="{$vo.id}">{$vo.name}</option>
+				{/volist}
+					<option value="">未分配</option>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>入职时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="date" class="input-text " placeholder="入职时间" name="hiredate" id=" value="" >
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+{/block}

@@ -1,0 +1,46 @@
+{extend name='public/_base'}
+
+{block name='seo'}
+<title>{$title|default='标题'}</title>
+<meta name="keywords" content="{$keywords|default='关键字'}">
+<meta name="description" content="{$desc|default='描述'}">
+{/block}
+
+{block name='content'}
+<article class="cl pd-20">
+	<form action="{:url('grade/addgrade')}" method="post" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>班级名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="adminName" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学制：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" autocomplete="off" value="" placeholder="学制" id="adminName" name="length">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>学费：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" autocomplete="off"  placeholder="学费" id="adminName" name="price">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">是否启用：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="status" size="1">
+					<option value="0">不启用</option>
+					<option value="1">启用</option>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+{/block}
